@@ -64,7 +64,8 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        searchResults = new List<Dictionary<string, string>>(JobData.FindByValue(searchTerm));
+                        PrintJobs(searchResults);
                     }
                     else
                     {
@@ -120,6 +121,7 @@ namespace TechJobsConsole
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
             StringBuilder jobDescription = new StringBuilder();
+            // Create nested loops over each dictionary
             if (someJobs.Count != 0)
                 foreach (Dictionary<string, string> job in someJobs)
                 {

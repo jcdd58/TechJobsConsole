@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Linq;
 
 namespace TechJobsConsole
 {
@@ -55,6 +56,26 @@ namespace TechJobsConsole
                 }
             }
 
+            return jobs;
+        }
+
+        //Second Task: Create FindByValue to search for a string within columns
+        public static List<Dictionary<string, string>> FindByValue(string search)
+        {
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+                string rowString;
+                rowString = string.Join(" ", row.Select(KeyValuePair => string.Join(" ", KeyValuePair.Key, KeyValuePair.Value)));
+                if (rowString.ToUpper().Contains(search.ToUpper()))
+                {
+                    jobs.Add(row);
+                }
+
+            }
             return jobs;
         }
 
